@@ -1,5 +1,6 @@
 package com.homechief.controller;
 
+import com.homechief.dto.ChangePasswordRequest;
 import com.homechief.dto.UserDTO;
 import com.homechief.model.User;
 import com.homechief.repository.UserRepository;
@@ -46,6 +47,23 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok("User registered successfully!");
+    }
+
+    // --- SIGNUP ---
+    @PostMapping("/signup/admin")
+    public ResponseEntity<String> signupadmin(@RequestBody UserDTO userDTO) {
+        if (userRepository.findByEmail(userDTO.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("User already exists!");
+        }
+
+        User user = new User();
+        user.setEmail(userDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        user.setName(userDTO.getName());
+        user.setRole("admin");
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Admin registered successfully!");
     }
 
     // --- LOGIN ---
