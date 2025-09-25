@@ -99,6 +99,16 @@ public class Ingredients {
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
 
+    public void setCreatedAt(LocalDateTime now)
+    {
+        this.createdAt = now;
+    }
+
+    public void setUpdatedAt(LocalDateTime now)
+    {
+        this.updatedAt = now;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = LocalDateTime.now();

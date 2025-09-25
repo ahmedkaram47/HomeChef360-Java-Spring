@@ -36,4 +36,13 @@ public class RecipeIngredients {
 
     public String getQuantity() { return quantity; }
     public void setQuantity(String quantity) { this.quantity = quantity; }
+
+
+    public String getUnit() {
+        return null;
+    }
+
+    public void setUnit(String unit) {
+
+    }
 }

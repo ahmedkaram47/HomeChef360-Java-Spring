@@ -20,10 +20,10 @@ public class UserPreferences {
     @Column(name = "DietaryType")
     private String dietaryType;
 
-    @Column(name = "Allergies", columnDefinition = "json")
+    @Column(name = "Allergies", columnDefinition = "JSON")
     private String allergies; // store as JSON string
 
-    @Column(name = "Dislikes", columnDefinition = "json")
+    @Column(name = "Dislikes", columnDefinition = "JSON")
     private String dislikes; // store as JSON string
 
     @Column(name = "Servings")
@@ -58,4 +58,26 @@ public class UserPreferences {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
+
+    public void setCreatedAt(LocalDateTime now)
+    {
+        this.createdAt = now;
+    }
+
+    public void setUpdatedAt(LocalDateTime now)
+    {
+        this.updatedAt = now;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
 }

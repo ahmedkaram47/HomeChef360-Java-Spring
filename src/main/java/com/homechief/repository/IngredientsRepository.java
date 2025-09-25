@@ -11,4 +11,6 @@ import java.util.List;
 public interface IngredientsRepository extends JpaRepository<Ingredients, Integer> {
     Optional<Ingredients> findByName(String name);
     List<Ingredients> findByCategory(String category);
+    List<Ingredients> findByNameContainingIgnoreCase(String name);
 }
+

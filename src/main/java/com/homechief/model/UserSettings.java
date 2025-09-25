@@ -69,4 +69,25 @@ public class UserSettings {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public LocalDateTime getUpdatedAt() { return updatedAt; }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    public void setCreatedAt(LocalDateTime now)
+    {
+        this.createdAt = now;
+    }
+
+    public void setUpdatedAt(LocalDateTime now)
+    {
+        this.updatedAt = now;
+    }
 }
