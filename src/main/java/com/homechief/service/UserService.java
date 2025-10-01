@@ -224,4 +224,6 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("Favorite not found"));
         userFavoritesRepository.delete(fav);
     }
+
+
 }
