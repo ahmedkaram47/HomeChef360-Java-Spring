@@ -15,15 +15,14 @@ public class RecipeVideos {
     @JoinColumn(name = "RecipeID", nullable = false)
     private Recipes recipe;
 
-    @Column(name = "VideoURL", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "VideoURL", columnDefinition = "TEXT")
     private String videoUrl;
 
-    @Column(name = "Caption", length = 255)
+    @Column(name = "Caption")
     private String caption;
 
     public RecipeVideos() {}
 
-    // Getters and setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

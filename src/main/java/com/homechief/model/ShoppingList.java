@@ -9,50 +9,46 @@ public class ShoppingList {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "UserID", referencedColumnName = "ID", nullable = false)
-    private User user;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "quantity")
+    private String quantity;
+
+    @Column(name = "status")
+    private String status;
+
+    @Column(name = "unit")
+    private String unit;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RecipeID", referencedColumnName = "ID", nullable = true)
+    @JoinColumn(name = "ingredientid")
+    private Ingredients ingredient;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recipeid")
     private Recipes recipe;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "IngredientID", referencedColumnName = "ID", nullable = true)
-    private Ingredients ingredient;
+    @JoinColumn(name = "userid", nullable = false)
+    private User user;
 
-    @Column(name = "Name", nullable = false)
-    private String name;
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 
-    @Column(name = "Quantity")
-    private String quantity;
-
-    @Column(name = "Unit")
-    private String unit;
-
-    @Column(name = "Status")
-    private String status = "Pending";
-
-    @Column(name = "CreatedAt", insertable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    public ShoppingList() {}
-
-    // Getters & setters
+    // Getters and setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-
-    public Recipes getRecipe() { return recipe; }
-    public void setRecipe(Recipes recipe) { this.recipe = recipe; }
-
-    public Ingredients getIngredient() { return ingredient; }
-    public void setIngredient(Ingredients ingredient) { this.ingredient = ingredient; }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -60,11 +56,18 @@ public class ShoppingList {
     public String getQuantity() { return quantity; }
     public void setQuantity(String quantity) { this.quantity = quantity; }
 
-    public String getUnit() { return unit; }
-    public void setUnit(String unit) { this.unit = unit; }
-
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    public LocalDateTime getCreatedAt() { return createdAt; }
+    public String getUnit() { return unit; }
+    public void setUnit(String unit) { this.unit = unit; }
+
+    public Ingredients getIngredient() { return ingredient; }
+    public void setIngredient(Ingredients ingredient) { this.ingredient = ingredient; }
+
+    public Recipes getRecipe() { return recipe; }
+    public void setRecipe(Recipes recipe) { this.recipe = recipe; }
+
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 }

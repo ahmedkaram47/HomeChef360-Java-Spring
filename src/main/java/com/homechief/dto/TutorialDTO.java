@@ -1,62 +1,26 @@
-package com.homechief.model;
-
-import jakarta.persistence.*;
+package com.homechief.dto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Entity
-@Table(name = "Tutorials")
-public class Tutorials {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+public class TutorialDTO {
     private Integer id;
-
-    @Column(name = "Title", nullable = false)
     private String title;
-
-    @Column(name = "Description", columnDefinition = "TEXT")
     private String description;
-
-    @Column(name = "ThumbnailUrl")
     private String thumbnailUrl;
-
-    @Column(name = "VideoUrl")
     private String videoUrl;
-
-    @Column(name = "Duration")
     private Integer duration;
-
-    @Column(name = "Difficulty")
     private String difficulty;
-
-    @Column(name = "InstructorName")
     private String instructorName;
-
-    @Column(name = "Rating")
     private Double rating;
-
-    @Column(name = "ViewCount")
     private Integer viewCount;
-
-    // Store steps/tags as JSON text in DB columns
-    @Column(name = "Steps", columnDefinition = "TEXT")
-    private String stepsJson;
-
-    @Column(name = "Tags", columnDefinition = "TEXT")
-    private String tagsJson;
-
-    @Column(name = "IsPublished")
-    private Boolean isPublished = true;
-
-    @Column(name = "CreatedAt", nullable = false, updatable = false)
+    private List<String> steps;
+    private List<String> tags;
+    private Boolean isPublished;
     private LocalDateTime createdAt;
-
-    @Column(name = "UpdatedAt", nullable = false)
     private LocalDateTime updatedAt;
 
-    public Tutorials() {}
+    public TutorialDTO() {}
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
@@ -88,28 +52,18 @@ public class Tutorials {
     public Integer getViewCount() { return viewCount; }
     public void setViewCount(Integer viewCount) { this.viewCount = viewCount; }
 
-    public String getStepsJson() { return stepsJson; }
-    public void setStepsJson(String stepsJson) { this.stepsJson = stepsJson; }
+    public List<String> getSteps() { return steps; }
+    public void setSteps(List<String> steps) { this.steps = steps; }
 
-    public String getTagsJson() { return tagsJson; }
-    public void setTagsJson(String tagsJson) { this.tagsJson = tagsJson; }
+    public List<String> getTags() { return tags; }
+    public void setTags(List<String> tags) { this.tags = tags; }
 
     public Boolean getIsPublished() { return isPublished; }
     public void setIsPublished(Boolean isPublished) { this.isPublished = isPublished; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
     public LocalDateTime getUpdatedAt() { return updatedAt; }
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-        if (this.rating == null) this.rating = 0.0;
-        if (this.viewCount == null) this.viewCount = 0;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }

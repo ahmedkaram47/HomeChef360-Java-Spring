@@ -2,11 +2,13 @@ package com.homechief.repository;
 
 import com.homechief.model.RecipeSteps;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-@Repository
 public interface RecipeStepRepository extends JpaRepository<RecipeSteps, Integer> {
-    List<RecipeSteps> findByRecipeId(Integer recipeId);
+
+    @Query("SELECT r FROM RecipeSteps r WHERE r.recipe.id = :recipeId ORDER BY r.stepNumber ASC")
+    List<RecipeSteps> findByRecipeId(@Param("recipeId") Integer recipeId);
 }

@@ -1,6 +1,5 @@
 package com.homechief.model;
 
-import com.homechief.model.Recipes;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,15 +15,14 @@ public class RecipeSteps {
     @JoinColumn(name = "RecipeID", nullable = false)
     private Recipes recipe;
 
-    @Column(name = "StepNumber", nullable = false)
+    @Column(name = "StepNumber")
     private Integer stepNumber;
 
-    @Column(name = "Instruction", columnDefinition = "TEXT", nullable = false)
+    @Column(name = "Instruction", columnDefinition = "TEXT")
     private String instruction;
 
     public RecipeSteps() {}
 
-    // Getters and setters
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
 

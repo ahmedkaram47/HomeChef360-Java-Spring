@@ -1,47 +1,19 @@
-package com.homechief.model;
-
-import jakarta.persistence.*;
+package com.homechief.dto;
 
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "NutritionTracking")
-public class NutritionTracking {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+public class NutritionTrackingDTO {
     private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "UserID", nullable = false)
-    private User user;
-
-    @Column(name = "Date", nullable = false)
     private LocalDate date;
-
-    @Column(name = "Calories")
     private Integer calories;
-
-    @Column(name = "Protein")
     private Integer protein;
-
-    @Column(name = "Carbs")
     private Integer carbs;
-
-    @Column(name = "Fat")
     private Integer fat;
-
-    @Column(name = "Fiber")
     private Integer fiber;
-
-    @Column(name = "Notes", columnDefinition = "TEXT")
     private String notes;
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
-
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
 
     public LocalDate getDate() { return date; }
     public void setDate(LocalDate date) { this.date = date; }

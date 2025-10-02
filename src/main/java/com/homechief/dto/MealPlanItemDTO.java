@@ -1,56 +1,23 @@
-package com.homechief.model;
-
-import jakarta.persistence.*;
+package com.homechief.dto;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "MealPlanItems")
-public class MealPlanItems {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+public class MealPlanItemDTO {
     private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "MealPlanID", nullable = false)
-    private MealPlans mealPlan;
-
-    @Column(name = "DayOfWeek")
     private String dayOfWeek;
-
-    @Column(name = "MealType")
     private String mealType;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "RecipeID")
-    private Recipes recipe; // nullable
-
-    @Column(name = "CustomMealName")
+    private Integer recipeId;
+    private String recipeName;
     private String customMealName;
-
-    @Column(name = "CustomMealDescription", columnDefinition = "TEXT")
     private String customMealDescription;
-
-    @Column(name = "Calories")
     private Integer calories;
-
-    @Column(name = "PrepTime")
     private Integer prepTime;
-
-    @Column(name = "CreatedAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    public MealPlanItems() {}
-
-    // Getters and setters
+    public MealPlanItemDTO() {}
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
-
-    public MealPlans getMealPlan() { return mealPlan; }
-    public void setMealPlan(MealPlans mealPlan) { this.mealPlan = mealPlan; }
 
     public String getDayOfWeek() { return dayOfWeek; }
     public void setDayOfWeek(String dayOfWeek) { this.dayOfWeek = dayOfWeek; }
@@ -58,8 +25,11 @@ public class MealPlanItems {
     public String getMealType() { return mealType; }
     public void setMealType(String mealType) { this.mealType = mealType; }
 
-    public Recipes getRecipe() { return recipe; }
-    public void setRecipe(Recipes recipe) { this.recipe = recipe; }
+    public Integer getRecipeId() { return recipeId; }
+    public void setRecipeId(Integer recipeId) { this.recipeId = recipeId; }
+
+    public String getRecipeName() { return recipeName; }
+    public void setRecipeName(String recipeName) { this.recipeName = recipeName; }
 
     public String getCustomMealName() { return customMealName; }
     public void setCustomMealName(String customMealName) { this.customMealName = customMealName; }
@@ -74,9 +44,5 @@ public class MealPlanItems {
     public void setPrepTime(Integer prepTime) { this.prepTime = prepTime; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-    }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 }

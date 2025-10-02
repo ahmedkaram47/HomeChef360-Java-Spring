@@ -1,59 +1,24 @@
-package com.homechief.model;
-
-import jakarta.persistence.*;
+package com.homechief.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "MealPlans")
-public class MealPlans {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID")
+public class MealPlanDTO {
     private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "UserID")
-    private User user;
-
-    @Column(name = "Name", nullable = false)
     private String name;
-
-    @Column(name = "Description", columnDefinition = "TEXT")
     private String description;
-
-    @Column(name = "StartDate", columnDefinition = "DATE")
     private LocalDate startDate;
-
-    @Column(name = "EndDate", columnDefinition = "DATE")
     private LocalDate endDate;
-
-    @Column(name = "TotalCalories")
     private Integer totalCalories;
-
-    @Column(name = "Difficulty")
     private String difficulty;
-
-    @Column(name = "Cuisine")
     private String cuisine;
-
-    @Column(name = "CreatedAt", nullable = false, updatable = false)
     private LocalDateTime createdAt;
-
-    @Column(name = "UpdatedAt", nullable = false)
     private LocalDateTime updatedAt;
 
-    public MealPlans() {}
-
-    // Getters and setters
+    public MealPlanDTO() {}
 
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
-
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -77,16 +42,8 @@ public class MealPlans {
     public void setCuisine(String cuisine) { this.cuisine = cuisine; }
 
     public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
     public LocalDateTime getUpdatedAt() { return updatedAt; }
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = LocalDateTime.now();
-    }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 }
